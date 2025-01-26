@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Список всех студентов";
+}
+
+<h2>Список всех студентов</h2>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>ФИО</th>
+                <th>Группа</th>
+                <th>Курс</th>
+                <th>Специальность</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var student in Model)
+            {
+                <tr>
+                    <td>@student.ID_Student</td>
+                    <td>@student.FIO</td>
+                    <td>@student.Group</td>
+                    <td>@student.Course</td>
+                    <td>@(student.Specialties?.Title ?? "Нет данных")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Нет данных для отображения.</p>
+}

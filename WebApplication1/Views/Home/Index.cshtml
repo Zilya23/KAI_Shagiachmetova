@@ -1,0 +1,31 @@
+﻿@model IEnumerable<WebApplication1.Students>
+
+@{
+    ViewBag.Title = "Список студентов";
+}
+
+
+
+<div>
+    <h3>Список студентов</h3>
+    <table>
+        <tr>
+            <td>Id</td>
+            <td>ФИО</td>
+            <td>Группа</td>
+            <td>Курс</td>
+            <td>Специальность</td>
+        </tr>
+        @foreach (Students s in Model)
+        {
+            <tr>
+                <td><p>@s.ID_Student</p></td>
+                <td><p>@s.FIO</p></td>
+                <td><p>@s.Group</p></td>
+                <td><p>@s.Course</p></td>
+                <td><p>@s.Specialties.Title</p></td>
+            </tr>
+        }
+    </table>
+    <br />
+</div>

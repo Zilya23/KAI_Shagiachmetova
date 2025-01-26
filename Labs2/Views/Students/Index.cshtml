@@ -1,0 +1,89 @@
+﻿@model IEnumerable<Labs2.Models.Students>
+
+@{
+    ViewBag.Title = "Список студентов";
+}
+
+<h2>Список студентов</h2>
+
+<!-- Форма для выбора специальности -->
+@using (Html.BeginForm("FilterBySpecialty", "Students", FormMethod.Get))
+{
+    <div class="form-group">
+        <label for="specialtyId">Выберите специальность:</label>
+        @Html.DropDownList("specialtyId", (SelectList)ViewBag.Specialties, "Все специальности", new { @class = "form-control" })
+    </div>
+    <button type="submit" class="btn btn-primary">Показать студентов</button>
+}
+
+<!-- Таблица со списком студентов -->
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>ФИО</th>
+            <th>Группа</th>
+            <th>Курс</th>
+            <th>Специальность</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var student in Model)
+        {
+            <tr>
+                <td>@student.ID_Student</td>
+                <td>@student.FIO</td>
+                <td>@student.Group</td>
+                <td>@student.Course</td>
+                <td>@(student.Specialties?.Title ?? "Нет данных")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@foreach (var student in Model)
+{
+    <tr>
+        <td>@student.ID_Student</td>
+        <td>@student.FIO</td>
+        <td>@student.Group</td>
+        <td>@student.Course</td>
+        <td>@(student.Specialties?.Title ?? "Нет данных")</td>
+        <td>
+            <a href="#" class="get-grades" data-student-id="@student.ID_Student" data-subject-id="1">Оценки</a>
+        </td>
+    </tr>
+}
+
+<!-- Место для отображения оценок -->
+<div id="grades-container"></div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $(".get-grades").click(function (e) {
+                e.preventDefault();
+
+                var studentId = $(this).data("student-id");
+                var subjectId = $(this).data("subject-id");
+
+                $.ajax({
+                    url: "@Url.Action("GetStudentGrades", "Students")",
+                    type: "GET",
+                    data: { studentId: studentId, subjectId: subjectId },
+                    success: function (data) {
+                        // Формируем HTML для отображения оценок
+                        var html = "<h4>Оценки студента по предмету: " + data.SubjectTitle + "</h4>";
+                        html += "<p>Оценка: " + (data.Evaluation1 ? data.Evaluation1 : "Нет данных") + "</p>";
+
+                        // Отображаем оценки в блоке #grades-container
+                        $("#grades-container").html(html);
+                    },
+                    error: function () {
+                        alert("Произошла ошибка при загрузке оценок.");
+                    }
+                });
+            });
+        });
+    </script>
+}

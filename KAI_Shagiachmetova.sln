@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32126.315
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KAI_Shagiachmetova", "KAI_Shagiachmetova\KAI_Shagiachmetova.csproj", "{B1839ADF-6787-42F5-8CD3-D2E75DA7F52B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Labs2", "Labs2\Labs2.csproj", "{1D87F6F8-E074-4758-9AC4-2400B49CF97A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Labs3", "Labs3\Labs3.csproj", "{10DDB1E0-59FF-4DAA-B5C7-16EB02F50E90}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B1839ADF-6787-42F5-8CD3-D2E75DA7F52B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1839ADF-6787-42F5-8CD3-D2E75DA7F52B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1839ADF-6787-42F5-8CD3-D2E75DA7F52B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1839ADF-6787-42F5-8CD3-D2E75DA7F52B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D87F6F8-E074-4758-9AC4-2400B49CF97A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D87F6F8-E074-4758-9AC4-2400B49CF97A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D87F6F8-E074-4758-9AC4-2400B49CF97A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D87F6F8-E074-4758-9AC4-2400B49CF97A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10DDB1E0-59FF-4DAA-B5C7-16EB02F50E90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10DDB1E0-59FF-4DAA-B5C7-16EB02F50E90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10DDB1E0-59FF-4DAA-B5C7-16EB02F50E90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10DDB1E0-59FF-4DAA-B5C7-16EB02F50E90}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {90AA6BCB-47E7-447D-9610-5F743EBE21EC}
+	EndGlobalSection
+EndGlobal

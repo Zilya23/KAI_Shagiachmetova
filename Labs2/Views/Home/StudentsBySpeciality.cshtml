@@ -1,0 +1,46 @@
+﻿@using Labs2.Models;
+@{
+    ViewBag.Title = "Список студентов";
+}
+@*<div>
+    <h3>Список студентов</h3>
+    <table>
+        <tr>
+            <td>Id</td>
+            <td>ФИО</td>
+            <td>Группа</td>
+            <td>Курс</td>
+            <td>Специальность</td>
+        </tr>
+        @foreach (Students s in Model.StudentsBySpeciality)
+        {
+            <tr>
+                <td><p>@s.ID_Student</p></td>
+                <td><p>@s.FIO</p></td>
+                <td><p>@s.Group</p></td>
+                <td><p>@s.Course</p></td>
+                <td><p>@s.Specialties.Title</p></td>
+            </tr>
+        }
+    </table>
+    <br />
+    <form method="post" action="/Home/GetMark">
+        <div class="form-inline form-group">
+            <label class="control-label">Получить оценку по предмету. Предмет: </label>
+            <select id="lessonName" name="lessonName">
+                @foreach (Subjects s in Model.Lessons)
+                {
+                    <option>@s.Title</option>
+                }
+            </select>
+            <label class="control-label">Студент: </label>
+            <select id="studentFIO" name="studentFIO">
+                @foreach (Students s in Model.StudentsBySpeciality)
+                {
+                    <option>@s.FIO</option>
+                }
+            </select>
+            <input type="submit" value="Получить" class="btn btn-default" />
+        </div>
+    </form>
+</div>*@

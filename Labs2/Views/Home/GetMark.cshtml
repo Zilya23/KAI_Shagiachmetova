@@ -1,0 +1,21 @@
+﻿@model Labs2.Models.Evaluations
+
+@{
+    ViewBag.Title = "Результат";
+    string result = "У студента нет оценки";
+}
+
+<!DOCTYPE html>
+
+<html>
+<body>
+    <div>
+        @if (Model != null)
+        {
+            result = $"Оценка студента: {Model.Evaluations1}";
+        }
+        @result
+    </div>
+</body>
+</html>
+
