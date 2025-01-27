@@ -1,24 +1,82 @@
-﻿<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>ASP.NET Web API is a framework that makes it easy to build HTTP services that reach
-        a broad range of clients, including browsers and mobile devices. ASP.NET Web API
-        is an ideal platform for building RESTful applications on the .NET Framework.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301870">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301871">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301872">Learn more &raquo;</a></p>
-    </div>
-</div>
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Студенты, не сдавшие предмет</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Студенты, не сдавшие предмет</h1>
+
+    <label for="subjectSelect">Выберите предмет:</label>
+    <select id="subjectSelect">
+        <!-- Опции будут заполнены через JavaScript -->
+    </select>
+
+    <button id="getFailedStudentsBtn">Получить список студентов</button>
+
+    <h2>Результат:</h2>
+    <div id="result"></div>
+
+    <script>
+        $(document).ready(function () {
+            // Загрузка списка предметов при загрузке страницы
+            $.ajax({
+                url: '/api/Subjects',
+                method: 'GET',
+                success: function (data) {
+                    if (data && data.length > 0) {
+                        var options = '';
+                        data.forEach(function (subject) {
+                            options += '<option value="' + subject.ID_Subjects + '">' + subject.Title + '</option>';
+                        });
+                        $('#subjectSelect').html(options);
+                    } else {
+                        console.error("Список предметов пуст.");
+                        $('#subjectSelect').html('<option value="">Нет доступных предметов</option>');
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error("Ошибка при загрузке предметов:", status, error);
+                    $('#subjectSelect').html('<option value="">Ошибка загрузки предметов</option>');
+                }
+            });
+
+            // Обработка нажатия на кнопку
+            $('#getFailedStudentsBtn').click(function () {
+                var subjectId = $('#subjectSelect').val(); // Получаем значение из выпадающего списка
+                console.error(subjectId)
+
+                // Проверяем, что subjectId не равен undefined
+                if (!subjectId) {
+                    alert("Пожалуйста, выберите предмет.");
+                    return;
+                }
+
+                // Выполняем запрос к API
+                $.ajax({
+                    url: '/api/Students/FailedStudents?subjectId=' + subjectId,
+                    method: 'GET',
+                    success: function (data) {
+                        console.log("Данные, полученные от API:", data); // Логируем данные для отладки
+
+                        if (data && data.length > 0) {
+                            var resultHtml = '<ul>';
+                            data.forEach(function (student) {
+                                resultHtml += '<li>' + student.FIO + ' (Группа: ' + student.Group + ', Курс: ' + student.Course + ', Специальность: ' + student.Specialty + ')</li>';
+                            });
+                            resultHtml += '</ul>';
+                        } else {
+                            resultHtml = 'Нет студентов, не сдавших этот предмет.';
+                        }
+                        $('#result').html(resultHtml);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Ошибка при запросе к API:", status, error);
+                        $('#result').html('Ошибка при получении данных. Подробности в консоли.');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Cors; // Подключение CORS
 
 namespace Labs3
 {
@@ -21,6 +22,10 @@ namespace Labs3
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            // Включаем CORS
+            var cors = new EnableCorsAttribute("*", "*", "*"); // Разрешить все запросы
+            config.EnableCors(cors);
         }
     }
 }
